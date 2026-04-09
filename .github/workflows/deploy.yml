@@ -28,6 +28,10 @@ jobs:
 
       - name: Build with Astro
         run: npm run build
+      
+      # 新增这一步：防止 Jekyll 干扰
+      - name: Disable Jekyll
+        run: touch ./dist/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
