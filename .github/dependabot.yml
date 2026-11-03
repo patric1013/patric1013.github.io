@@ -1,26 +1,22 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
+      interval: "daily"
     groups:
-      minor-and-patch:
-        applies-to: version-updates
+      patch-updates:
+        patterns:
+          - "*"
         update-types:
-          - minor
-          - patch
-      security:
-        applies-to: security-updates
+          - "patch"
+      minor-updates:
         patterns:
           - "*"
-
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: monthly
-    groups:
-      actions:
-        patterns:
-          - "*"
+        update-types:
+          - "minor"
+    pull-request-branch-name:
+      separator: "-"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
